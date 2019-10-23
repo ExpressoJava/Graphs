@@ -3,32 +3,59 @@ Simple graph implementation
 """
 from util import Stack, Queue  # These may come in handy
 
+
 class Graph:
     """Represent a graph as a dictionary of vertices mapping labels to edges."""
+
     def __init__(self):
         self.vertices = {}
+
     def add_vertex(self, vertex):
         """
         Add a vertex to the graph.
+
         """
-        pass  # TODO
+        self.vertices[vertex] = set()
+
     def add_edge(self, v1, v2):
         """
         Add a directed edge to the graph.
         """
-        pass  # TODO
+        if v1 in self.vertices and v2 in self.vertices:
+            self.vertices[v1].add(v2)
+        else:
+            raise IndexError(
+                "One or more of the vertices you provided are not valid. ")
+
     def bft(self, starting_vertex):
         """
         Print each vertex in breadth-first order
         beginning from starting_vertex.
         """
-        pass  # TODO
+        # Create an empty queue and enqueue the starting vertext ID
+        q = Queue()
+        visited = set()
+
+        q.enqueue(starting_vertex)
+
+        while q.size():
+            # pop one out
+            vertex = q.dequeue()
+            # if not visited, mark as visited
+            if vertex not in visited:
+                # Get adjacent, add to the list
+                visited.add(vertex)
+                print(vertex)
+                for ea in self.vertices[vertex]:
+                    q.enqueue(ea)
+
     def dft(self, starting_vertex):
         """
         Print each vertex in depth-first order
         beginning from starting_vertex.
         """
         pass  # TODO
+
     def dft_recursive(self, starting_vertex):
         """
         Print each vertex in depth-first order
@@ -36,6 +63,7 @@ class Graph:
         This should be done using recursion.
         """
         pass  # TODO
+
     def bfs(self, starting_vertex, destination_vertex):
         """
         Return a list containing the shortest path from
@@ -43,6 +71,7 @@ class Graph:
         breath-first order.
         """
         pass  # TODO
+
     def dfs(self, starting_vertex, destination_vertex):
         """
         Return a list containing a path from
@@ -50,9 +79,6 @@ class Graph:
         depth-first order.
         """
         pass  # TODO
-
-
-
 
 
 if __name__ == '__main__':
